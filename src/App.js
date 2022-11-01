@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import Profile from "./components/profile";
+import EditProfile from './components/editProfile';
+import { Routes,Route } from 'react-router-dom';
+import PaymentTable from './components/common/paymentTable';
+import ProductTable from './components/common/productTable';
+import ProductDetail from "./components/common/productDetail";
+import NoMatch from "./components/noMatch";
+
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path="/" element={<Profile />}>
+            <Route index element={<PaymentTable />} />
+            <Route path="payment" element={<PaymentTable />} />
+            <Route path="products" element={<ProductTable />} />
+        </Route>
+        <Route path="products/:id" element={<ProductDetail />} />
+        <Route path="edit-profile" element={<EditProfile/>}/>
+        <Route path="*" element={<NoMatch/>}/>
+      </Routes>
+      
+      
     </div>
   );
 }
